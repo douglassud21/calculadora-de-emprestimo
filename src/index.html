@@ -134,7 +134,35 @@
             }
         }
 
-        
+        function save(amount, apr, years, zipcode) {
+
+            if (window.localStorage) {
+                localStorage.loan_amount = amount;
+                localStorage.loan_apr = apr;
+                localStorage.loan_years = years;
+                localStorage.loan_zipcode = zipcode;
+            }
+
+        }
+
+        function getLenders(amount, apr, years, zipcode) {
+
+            if (!window.XMLHttpRequest) return;
+
+            var ad = document.getElementById("lenders");
+            if (!ad) return;
+
+            var url = "getLenders.php" +
+                "?amt=" + encodeURIComponent(amount) +
+                "&apr=" + encodeURIComponent(apr) +
+                "&yrs=" + encodeURIComponent(years) +
+                "&zip=" + encodeURIComponent(zipcode);
+
+            var req = new XMLHttpRequest();
+            req.open("GET", url);
+            req.send(null);
+
+        }
 
     </script>
 </body>
